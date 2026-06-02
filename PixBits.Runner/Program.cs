@@ -463,16 +463,24 @@ async Task ScanManifests()
     }
 }
 
-    async Task ExportToVirtualCard(string id)
+async Task ExportToVirtualCard(string id)
+{
+    string manifestPath = $"PixBit_{id}.json";
+    string metaPath = $"PixBit_{id}_Metadata.json";
+
+    if (!File.Exists(manifestPath)) return;
+
+    // 1. CONFIGURE OUT-OF-ORDER METADATA BYPASS
+    var serializerOptions = new JsonSerializerOptions
     {
-        string manifestPath = $"PixBit_{id}.json";
-        string metaPath = $"PixBit_{id}_Metadata.json";
+        PropertyNameCaseInsensitive = true,
+        AllowOutOfOrderMetadataProperties = true // Tells the parser to look deeper for 'ServiceClass'
+    };
 
-        if (!File.Exists(manifestPath)) return;
-
-        var package = JsonSerializer.Deserialize<PixBitPackage>(File.ReadAllText(manifestPath));
-        var metadata = JsonDocument.Parse(File.ReadAllText(metaPath));
-        string secret = metadata.RootElement.GetProperty("SecretKey").GetString() ?? "";
+    // 2. PASS OPTIONS TO THE DESERIALIZER
+    var package = JsonSerializer.Deserialize<PixBitPackage>(File.ReadAllText(manifestPath), serializerOptions);
+    var metadata = JsonDocument.Parse(File.ReadAllText(metaPath));
+    string secret = metadata.RootElement.GetProperty("SecretKey").GetString() ?? "";
 
         // UPGRADED GUARD: Ensure package and VisualManifest are completely initialized
         if (package?.VisualManifest == null || package.Agent == null)

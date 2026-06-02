@@ -15,6 +15,16 @@ namespace PixBits.Core {
     [JsonPolymorphic(TypeDiscriminatorPropertyName = "ServiceClass")]
     [JsonDerivedType(typeof(PixBitService), "standard")]
     [JsonDerivedType(typeof(QuantumService), "quantum")]
+    public abstract class AgentService 
+    {
+        // OPTION A: If you need to read/write it in other logic, keep the property but hide it from the JSON parser
+        [JsonIgnore] 
+        public string ServiceClass { get; set; } = "";
+
+        // Other shared properties
+        public string Endpoint { get; set; } = "";
+        public string[] Methods { get; set; } = Array.Empty<string>();
+    }
     public class PixBitService {
         public string Type { get; set; } = "BaseRegistry"; // Defaulting to the Base identity architecture
         public string Name { get; set; } = "PixBits Base Agent";
