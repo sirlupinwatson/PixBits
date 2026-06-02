@@ -1,0 +1,27 @@
+# === System & Environment Secrets ===
+.env
+*.env
+*.key
+.vscode/
+
+# === .NET Build Outputs ===
+[Bb]in/
+[Oo]bj/
+PixBits.Core/bin/
+PixBits.Core/obj/
+PixBits.Runner/bin/
+PixBits.Runner/obj/
+
+# === Foundry Smart Contract Artifacts ===
+PixBitsContracts/cache/
+PixBitsContracts/out/
+PixBitsContracts/lib/ forge-std/
+foundry.lock
+
+# === Local Sandbox Data & Simulation Artifacts ===
+# Protects your sensitive generated keys and test agents from leaking
+*_Metadata.json
+Fake_Agent.json
+PixBit_*.json
+Provisioning_*.apdu
+PIV_Card_*
