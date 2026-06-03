@@ -45,4 +45,4 @@ The next developmental branch moves beyond identity creation and focuses heavily
 
 * [ ] **On-Chain Corporate Brand Reservations:** Implementing a smart-contract level string protection registry to prevent endpoint squatting on high-value names (e.g., `google.pixbits.base.eth`).
 * [ ] **Native Basename Ownership Validation:** Transitioning the CLI namespace checks from mock web APIs to direct Nethereum contract calls, verifying that the minting wallet explicitly holds the underlying Base Name domain token before allowing an identity stamp.
-* [ ] **Built-in Multi-Sig & Wallet Synchronization:** Embedding a low-level key management system directly inside the runner to combine domain registration and identity proofing into a single atomic atomic transaction flow.
+* [ ] **Built-in Multi-Sig & Wallet Synchronization:** Embedding a low-level key management system directly inside the runner to combine domain registration and identity proofing into a single atomic transaction flow.
